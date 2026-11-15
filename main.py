@@ -1,30 +1,40 @@
-nombre_producto = input ("inserte el nombre de el producto:")
-stock = int (input ("introduce la cantidad del producto:"))
-stock_minimo = int (input ("introduce la cantidad minima de producto:"))
-print (f"producto registrado {nombre_producto}, con un stock de {stock} y sus unidades minimas son {stock_minimo}")
-producto = {
-    "nombre": nombre_producto,
-    "stock": stock,
-    "stock_minimo": stock_minimo
-}
+from inventario import registrar_producto, mostrar_inventario
 inventario = []
-inventario.append(producto)
-len (inventario)
-print (f"productos agregados:{len (inventario)}")
+nombre_producto = input ("ingrese el nombre del producto:").strip()
+while nombre_producto == "":
+            print("el nombre del producto no puede estar vacio")
+            nombre_producto = input ("ingrese el nombre del producto:").strip()
+stock = int(input("ingrese el stock del producto:"))
+while stock <= 0:
+            print("el stock no puede ser negativo")
+            stock = int (input("ingrese el stock del producto:"))
+stock_minimo = int(input ("ingrese el stock minimo del producto:"))
+while stock_minimo < 0:
+            print ("el stock minimo no puede ser negativo")
+            stock_minimo = int (input ("ingrese el stock minimo del producto:"))
+
+agregar_producto = registrar_producto (inventario, nombre_producto, stock, stock_minimo)
+mostrar_inventario(inventario)
+
 continuar = True
 while continuar:
-    respuesta = input ('desea agregar otro prodcto?: ')
-    if respuesta.lower() == 'si' or respuesta.lower() =="sí":
-        nombre_producto = input ("inserte el nombre de el producto:")
-        stock = int(input ("introduce la cantidad del producto = "))
-        stock_minimo = int(input ("introduce la cantidad minima del producto:"))
-        print (f"producto registrado {nombre_producto}, con un stock de {stock} y sus unidades minimas son {stock_minimo}")
-        producto = {
-            "nombre": nombre_producto,
-            "stock": stock,
-            "stock_minimo": stock_minimo
-        }
-        inventario.append(producto)
-        print ( f"productos agregados: {len (inventario)}")
+    respuesta = input("desea agregar otro producto? (si/no):")
+    if respuesta.lower().strip() == "si":
+        nombre_producto = input ("ingrese el nombre del producto:").strip()
+        while nombre_producto == "":
+            print("el nombre del producto no puede estar vacio")
+            nombre_producto = input ("ingrese el nombre del producto:").strip()
+        stock = int (input("ingrese el stock del producto:")) 
+        while stock <= 0:
+            print("el stock no puede ser negativo")
+            stock = int (input("ingrese el stock del producto:"))
+        stock_minimo = int (input ("ingrese el stock minimo del producto:"))
+        while stock_minimo < 0:
+            print ("el stock minimo no puede ser negativo")
+            stock_minimo = int (input ("ingrese el stock minimo del producto:"))
+        agregar_producto = registrar_producto (inventario, nombre_producto, stock, stock_minimo)
+        mostrar_inventario (inventario)
     else:
         continuar = False
+        print("los productos fueron registrados correctamente")
+        print (f"el inventario hace un total de {len(inventario)} de productos registrados")
